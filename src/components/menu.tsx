@@ -18,14 +18,14 @@ const Menu = ({
   layoutId: string;
 }) => {
   return (
-    <nav className="border-b-2 flex items-center justify-center">
+    <nav className="border-b-2 flex items-center ">
       <ul className="flex flex-row gap-3 sm:gap-4">
         {columns.map((column, index) => (
           <li
             key={`${column.columnName}-${index}`}
             className="relative h-full px-3 py-2"
           >
-            <a
+            <button
               onClick={() => handleTabChange(column.alias)}
               className={`cursor-pointer transition-transform duration-200 ${
                 column.alias === selectedTab
@@ -42,7 +42,7 @@ const Menu = ({
                   className="absolute inset-0 border-b-2 border-[#4B40EE]"
                 />
               )}
-            </a>
+            </button>
           </li>
         ))}
       </ul>

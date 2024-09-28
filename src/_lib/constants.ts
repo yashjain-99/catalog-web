@@ -6,7 +6,7 @@ export const columns = Object.seal([
   { columnName: "Settings", alias: "settings" },
 ]);
 
-export const intervals = Object.freeze([
+export const intervals: Interval[] = Object.seal([
   "1d",
   "3d",
   "1w",

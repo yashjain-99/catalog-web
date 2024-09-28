@@ -36,18 +36,19 @@ export const formatStockData = (
   data: StockData
 ): {
   lastTradingPrice: number;
-  closingPrices: { [date: string]: string };
+  closingPrices: { time: string; value: number }[];
   priceChange: number;
 } => {
   let lastTradingPrice = 0;
   let priceChange = 0;
-  const closingPrices = Object.fromEntries(
-    Object.entries(data["Time Series (Daily)"]).map((entry, idx) => {
+  const closingPrices = Object.entries(data["Time Series (Daily)"]).map(
+    (entry, idx) => {
       const tradingPrice = parseFloat(entry[1]["4. close"]);
       if (idx == 0) lastTradingPrice = tradingPrice;
       if (idx == 1) priceChange = lastTradingPrice - tradingPrice;
-      return [entry[0], entry[1]["4. close"]];
-    })
+      return { time: entry[0], value: parseFloat(entry[1]["4. close"]) };
+    }
   );
+  closingPrices.reverse();
   return { lastTradingPrice, closingPrices, priceChange };
 };
