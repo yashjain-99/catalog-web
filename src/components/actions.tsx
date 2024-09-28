@@ -1,4 +1,4 @@
-import { intervals } from "@/_lib/constants";
+import { INTERVALS } from "@/lib/constants";
 import { MdOpenInFull } from "react-icons/md";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import React from "react";
@@ -28,7 +28,7 @@ const Actions = () => {
         <ActionItem label="Compare" icon={IoIosAddCircleOutline} />
       </div>
       <div className="flex items-center gap-2">
-        {intervals.map((interval, index) => (
+        {INTERVALS.map((interval, index) => (
           <IntervalIetm interval={interval} key={index} />
         ))}
       </div>

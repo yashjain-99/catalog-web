@@ -1,13 +1,24 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App'
-import './index.css'
-import { IntervalProvider } from './contexts/IntervalContext'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
+import "./index.css";
+import { IntervalProvider } from "./contexts/IntervalContext";
+import { QueryClient, QueryClientProvider } from "react-query";
 
-createRoot(document.getElementById('root')!).render(
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <IntervalProvider>
-    <App />
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
     </IntervalProvider>
-  </StrictMode>,
-)
+  </StrictMode>
+);

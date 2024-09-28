@@ -1,12 +1,28 @@
-import { calculatePercentChange, formatPrice } from "@/_lib/helpers";
+import {
+  calculatePercentChange,
+  formatPrice,
+  formatStockData,
+} from "@/lib/utils";
+import { useGetStockData } from "@/services/queries";
+import React, { useEffect, useState } from "react";
 
-const Header = ({
-  lastTradingPrice,
-  priceChange,
-}: {
-  lastTradingPrice: number;
-  priceChange: number;
-}) => {
+const Header = () => {
+  const [lastTradingPrice, setLastTradingPrice] = useState(0);
+  const [priceChange, setPriceChange] = useState(0);
+  const { data, isLoading, isError } = useGetStockData("1d");
+  useEffect(() => {
+    if (data) {
+      const { lastTradingPrice, priceChange } = formatStockData(data);
+      setLastTradingPrice(lastTradingPrice);
+      setPriceChange(priceChange);
+    }
+  }, [data]);
+  if (isError) {
+    return "Error fetching data in header";
+  }
+  if (isLoading) {
+    return "Loading ...";
+  }
   return (
     <header className="flex flex-col gap-2">
       <div className="flex font-inter">
@@ -34,4 +50,4 @@ const Header = ({
   );
 };
 
-export default Header;
+export default React.memo(Header);

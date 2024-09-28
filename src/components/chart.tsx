@@ -1,7 +1,18 @@
 import { createChart, ColorType } from "lightweight-charts";
 import React, { useEffect, useRef } from "react";
 
-const ChartComponent = (props) => {
+interface ChartComponentProps {
+  data: { time: number; value: number }[];
+  colors?: {
+    backgroundColor?: string;
+    lineColor?: string;
+    textColor?: string;
+    areaTopColor?: string;
+    areaBottomColor?: string;
+  };
+}
+
+const ChartComponent: React.FC<ChartComponentProps> = (props) => {
   const {
     data,
     colors: {
@@ -13,12 +24,10 @@ const ChartComponent = (props) => {
     } = {},
   } = props;
 
-  const chartContainerRef = useRef();
+  const chartContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const handleResize = () => {
-      chart.applyOptions({ width: chartContainerRef.current.clientWidth });
-    };
+    if (!chartContainerRef.current) return;
 
     const chart = createChart(chartContainerRef.current, {
       layout: {
@@ -37,11 +46,14 @@ const ChartComponent = (props) => {
     });
     newSeries.setData(data);
 
+    const handleResize = () => {
+      chart.applyOptions({ width: chartContainerRef.current!.clientWidth });
+    };
+
     window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
-
       chart.remove();
     };
   }, [
