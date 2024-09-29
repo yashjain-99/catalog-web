@@ -1,5 +1,4 @@
 import { useIntervalContext } from "@/contexts/IntervalContext";
-import React from "react";
 import { motion } from "framer-motion";
 const IntervalIetm = ({ interval }: { interval: Interval }) => {
   const { interval: selectedInterval, setInterval } = useIntervalContext();

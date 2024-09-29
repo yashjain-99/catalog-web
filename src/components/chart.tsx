@@ -1,9 +1,9 @@
 import {
-  createChart,
-  ColorType,
   AreaData,
-  Time,
+  ColorType,
+  createChart,
   HistogramData,
+  Time,
 } from "lightweight-charts";
 import React, { useEffect, useRef } from "react";
 

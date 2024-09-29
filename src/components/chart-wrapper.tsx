@@ -1,10 +1,10 @@
-import { formatStockData } from "@/lib/utils";
 import { useIntervalContext } from "@/contexts/IntervalContext";
+import { useThemeContext } from "@/contexts/ThemeProvider";
+import { formatStockData } from "@/lib/utils";
 import { useGetStockData } from "@/services/queries";
 import React, { useEffect, useState } from "react";
 import ChartComponent from "./chart";
 import ChartLoader from "./loader/chart-loader";
-import { useThemeContext } from "@/contexts/ThemeProvider";
 
 const ChartWrapper = () => {
   const [closingPrices, setClosingPrices] = useState<

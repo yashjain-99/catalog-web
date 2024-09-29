@@ -1,8 +1,7 @@
 import { INTERVALS } from "@/lib/constants";
-import { MdOpenInFull } from "react-icons/md";
-import { IoIosAddCircleOutline } from "react-icons/io";
-import React from "react";
 import type { IconType } from "react-icons";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { MdOpenInFull } from "react-icons/md";
 import IntervalIetm from "./interval-item";
 
 const ActionItem = ({
