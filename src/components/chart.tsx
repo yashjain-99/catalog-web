@@ -65,11 +65,11 @@ const ChartComponent: React.FC<ChartComponentProps> = (props) => {
       priceFormat: {
         type: "volume",
       },
-      priceScaleId: "", // set as an overlay by setting a blank priceScaleId
+      priceScaleId: "",
     });
     volumeSeries.priceScale().applyOptions({
       scaleMargins: {
-        top: 0.8, // highest point of the series will be 70% away from the top
+        top: 0.8,
         bottom: 0,
       },
     });
@@ -92,6 +92,8 @@ const ChartComponent: React.FC<ChartComponentProps> = (props) => {
     textColor,
     areaTopColor,
     areaBottomColor,
+    interval,
+    volume,
   ]);
 
   return <div ref={chartContainerRef} />;

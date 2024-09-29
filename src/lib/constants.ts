@@ -15,3 +15,19 @@ export const INTERVALS: Interval[] = Object.seal([
   "1y",
   "max",
 ]);
+
+export const CHART_COLORS_DARK = {
+  backgroundColor: "#1E1E1E",
+  lineColor: "#4B40EE",
+  textColor: "white",
+  areaTopColor: "#2962FF",
+  areaBottomColor: "#E8E7FF",
+};
+
+export const CHART_COLORS_LIGHT = {
+  backgroundColor: "white",
+  lineColor: "#4B40EE",
+  textColor: "black",
+  areaTopColor: "#A7C8FF",
+  areaBottomColor: "#E8E7FF",
+};

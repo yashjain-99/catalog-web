@@ -5,6 +5,7 @@ import { useGetStockData } from "@/services/queries";
 import React, { useEffect, useState } from "react";
 import ChartComponent from "./chart";
 import ChartLoader from "./loader/chart-loader";
+import { CHART_COLORS_DARK, CHART_COLORS_LIGHT } from "@/lib/constants";
 
 const ChartWrapper = () => {
   const [closingPrices, setClosingPrices] = useState<
@@ -32,22 +33,7 @@ const ChartWrapper = () => {
     return <ChartLoader />;
   }
 
-  const colors =
-    theme === "dark"
-      ? {
-          backgroundColor: "#1E1E1E",
-          lineColor: "#4B40EE",
-          textColor: "white",
-          areaTopColor: "#2962FF",
-          areaBottomColor: "#E8E7FF",
-        }
-      : {
-          backgroundColor: "white",
-          lineColor: "#4B40EE",
-          textColor: "black",
-          areaTopColor: "#A7C8FF",
-          areaBottomColor: "#E8E7FF",
-        };
+  const colors = theme === "dark" ? CHART_COLORS_DARK : CHART_COLORS_LIGHT;
 
   return (
     <ChartComponent
