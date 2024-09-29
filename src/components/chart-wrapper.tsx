@@ -9,13 +9,17 @@ const ChartWrapper = () => {
   const [closingPrices, setClosingPrices] = useState<
     { time: number; value: number }[] | []
   >([]);
+  const [volume, setVolume] = useState<{ time: number; value: number }[] | []>(
+    []
+  );
   const { interval } = useIntervalContext();
 
   const { data, isLoading, isError } = useGetStockData(interval);
   useEffect(() => {
     if (data) {
-      const { closingPrices } = formatStockData(data, interval);
+      const { closingPrices, volume } = formatStockData(data, interval);
       setClosingPrices(closingPrices);
+      setVolume(volume);
     }
   }, [data, interval]);
   if (isError) {
@@ -25,7 +29,9 @@ const ChartWrapper = () => {
     return <ChartLoader />;
   }
 
-  return <ChartComponent data={closingPrices} interval={interval} />;
+  return (
+    <ChartComponent data={closingPrices} interval={interval} volume={volume} />
+  );
 };
 
 export default React.memo(ChartWrapper);
