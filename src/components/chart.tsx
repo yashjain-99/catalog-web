@@ -72,7 +72,6 @@ const ChartComponent: React.FC<ChartComponentProps> = (props) => {
         top: 0.8, // highest point of the series will be 70% away from the top
         bottom: 0,
       },
-      borderColor: "#2962FF",
     });
     volumeSeries.setData(volume as HistogramData<Time>[]);
 

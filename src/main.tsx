@@ -4,6 +4,7 @@ import App from "./App";
 import "./index.css";
 import { IntervalProvider } from "./contexts/IntervalContext";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { makeServer } from "./mirage/config";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -12,6 +13,7 @@ const queryClient = new QueryClient({
     },
   },
 });
+makeServer();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

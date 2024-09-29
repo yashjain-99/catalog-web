@@ -1,17 +1,10 @@
-import { API_FUNCTIONS, StockData } from "@/types/api";
+import { StockData } from "@/types/api";
 import axios from "axios";
 
-const BASE_URL = "https://www.alphavantage.co";
+const BASE_URL = `${window.location.origin}/api`;
 const axiosInstance = axios.create({ baseURL: BASE_URL });
 
-export const getStockData = async (func: API_FUNCTIONS): Promise<StockData> => {
-  const response = await axiosInstance.get<StockData>("query", {
-    params: {
-      function: func,
-      symbol: "IBM",
-      ...(func == "TIME_SERIES_INTRADAY" && { interval: "5min" }),
-      apikey: "demo",
-    },
-  });
+export const getStockData = async (params: string): Promise<StockData> => {
+  const response = await axiosInstance.get<StockData>(params);
   return response.data;
 };

@@ -17,7 +17,7 @@ const ChartWrapper = () => {
   const { data, isLoading, isError } = useGetStockData(interval);
   useEffect(() => {
     if (data) {
-      const { closingPrices, volume } = formatStockData(data, interval);
+      const { closingPrices, volume } = formatStockData(data);
       setClosingPrices(closingPrices);
       setVolume(volume);
     }

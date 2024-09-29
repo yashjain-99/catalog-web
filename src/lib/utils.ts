@@ -1,5 +1,4 @@
 import { StockData } from "@/types/api";
-import { INTERVAL_TO_TIME_SERIES_KEY, SIZE } from "./constants";
 
 export const formatPrice = (price: number) => {
   return new Intl.NumberFormat("en-US").format(price);
@@ -13,8 +12,7 @@ export const calculatePercentChange = (
 };
 
 export const formatStockData = (
-  data: StockData,
-  interval: Interval = "1d"
+  data: StockData
 ): {
   lastTradingPrice: number;
   closingPrices: { time: number; value: number }[];
@@ -23,22 +21,15 @@ export const formatStockData = (
 } => {
   let lastTradingPrice = 0;
   let priceChange = 0;
-  const timeSeriesKey = INTERVAL_TO_TIME_SERIES_KEY[interval];
-  const size = SIZE[interval];
 
-  const closingPricesEntries = Object.entries(data[timeSeriesKey]);
-  const limitEntries =
-    size === -1 ? closingPricesEntries : closingPricesEntries.slice(0, size);
+  const closingPricesEntries = Object.entries(data["data"]);
 
   const closingPrices: { time: number; value: number }[] = [];
   const volume: { time: number; value: number; color: string }[] = [];
 
-  limitEntries.forEach((entry, idx) => {
-    const tradingPrice = parseFloat(entry[1]["4. close"]);
-    const tradingVolume =
-      interval === "1d"
-        ? parseInt(entry[1]["5. volume"], 10)
-        : parseInt(entry[1]["6. volume"], 10);
+  closingPricesEntries.forEach((entry, idx) => {
+    const tradingPrice = parseFloat(entry[1]["close"]);
+    const tradingVolume = parseInt(entry[1]["volume"], 10);
 
     const timestamp = Date.parse(entry[0]) / 1000;
 
