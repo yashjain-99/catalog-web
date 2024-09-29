@@ -12,7 +12,6 @@ const App = () => {
   const { setInterval } = useIntervalContext();
   const { theme, setTheme } = useThemeContext();
   const [selectedTab, setSelectedTab] = useState("chart");
-
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     const intervalParam = queryParams.get("interval") as Interval;

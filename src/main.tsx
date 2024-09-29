@@ -2,28 +2,22 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
-import { IntervalProvider } from "./contexts/IntervalContext";
-import { QueryClient, QueryClientProvider } from "react-query";
 import { makeServer } from "./mirage/config";
-import { ThemeProvider } from "./contexts/ThemeProvider";
+import AppProvider from "./provider";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-    },
-  },
-});
+// Set up Mirage server for mock API calls
 makeServer();
 
-createRoot(document.getElementById("root")!).render(
+// Create the root element and render the application
+const rootElement = document.getElementById("root");
+if (!rootElement) {
+  throw new Error("Root element not found");
+}
+
+createRoot(rootElement).render(
   <StrictMode>
-    <ThemeProvider>
-      <IntervalProvider>
-        <QueryClientProvider client={queryClient}>
-          <App />
-        </QueryClientProvider>
-      </IntervalProvider>
-    </ThemeProvider>
+    <AppProvider>
+      <App />
+    </AppProvider>
   </StrictMode>
 );
