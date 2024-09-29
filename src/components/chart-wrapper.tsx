@@ -3,6 +3,7 @@ import { useIntervalContext } from "@/contexts/IntervalContext";
 import { useGetStockData } from "@/services/queries";
 import React, { useEffect, useState } from "react";
 import ChartComponent from "./chart";
+import ChartLoader from "./loader/chart-loader";
 
 const ChartWrapper = () => {
   const [closingPrices, setClosingPrices] = useState<
@@ -21,10 +22,10 @@ const ChartWrapper = () => {
     return "Error fetching data in chart";
   }
   if (isLoading) {
-    return "Loading ...";
+    return <ChartLoader />;
   }
 
-  return <ChartComponent data={closingPrices} />;
+  return <ChartComponent data={closingPrices} interval={interval} />;
 };
 
 export default React.memo(ChartWrapper);

@@ -1,8 +1,9 @@
-import { createChart, ColorType } from "lightweight-charts";
+import { createChart, ColorType, AreaData, Time } from "lightweight-charts";
 import React, { useEffect, useRef } from "react";
 
 interface ChartComponentProps {
   data: { time: number; value: number }[];
+  interval: Interval;
   colors?: {
     backgroundColor?: string;
     lineColor?: string;
@@ -15,6 +16,7 @@ interface ChartComponentProps {
 const ChartComponent: React.FC<ChartComponentProps> = (props) => {
   const {
     data,
+    interval,
     colors: {
       backgroundColor = "white",
       lineColor = "#4B40EE",
@@ -36,6 +38,10 @@ const ChartComponent: React.FC<ChartComponentProps> = (props) => {
       },
       width: chartContainerRef.current.clientWidth,
       height: 300,
+      timeScale: {
+        timeVisible: interval === "1d",
+        secondsVisible: false,
+      },
     });
     chart.timeScale().fitContent();
 
@@ -44,7 +50,7 @@ const ChartComponent: React.FC<ChartComponentProps> = (props) => {
       topColor: areaTopColor,
       bottomColor: areaBottomColor,
     });
-    newSeries.setData(data);
+    newSeries.setData(data as AreaData<Time>[]);
 
     const handleResize = () => {
       chart.applyOptions({ width: chartContainerRef.current!.clientWidth });

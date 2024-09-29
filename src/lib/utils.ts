@@ -34,8 +34,8 @@ export const formatStockData = (
     if (idx === 0) lastTradingPrice = tradingPrice;
     if (idx === 1) priceChange = lastTradingPrice - tradingPrice;
 
-    const date = new Date(`${entry[0]} UTC`);
-    const timestamp = Math.floor(date.getTime() / 1000);
+    const date = Date.parse(`${entry[0]}`);
+    const timestamp = date / 1000;
 
     return {
       time: timestamp,
