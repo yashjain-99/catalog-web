@@ -29,7 +29,9 @@ const Header = () => {
         <span className="text-3xl lg:text-4xl font-bold">
           {formatPrice(lastTradingPrice)}
         </span>
-        <sup className=" font-medium text-base text-[#475467] mt-2">USD</sup>
+        <sup className=" font-medium text-base text-muted-foreground mt-2">
+          USD
+        </sup>
       </div>
       <div
         className={`${

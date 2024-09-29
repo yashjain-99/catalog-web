@@ -5,9 +5,12 @@ import { COLUMNS, INTERVALS } from "./lib/constants";
 import Header from "./components/header";
 import Actions from "./components/actions";
 import ChartWrapper from "./components/chart-wrapper";
+import ThemeToggle from "./components/theme-toggle";
+import { useThemeContext } from "./contexts/ThemeProvider";
 
 const App = () => {
   const { setInterval } = useIntervalContext();
+  const { theme, setTheme } = useThemeContext();
   const [selectedTab, setSelectedTab] = useState("chart");
 
   useEffect(() => {
@@ -18,8 +21,19 @@ const App = () => {
     }
   }, [setInterval]);
 
+  useEffect(() => {
+    if (localStorage.getItem("theme")) {
+      const theme = localStorage.getItem("theme");
+      if (theme) {
+        if (["light", "dark"].includes(theme)) setTheme(theme as Theme);
+      }
+    }
+  }, [setTheme]);
+
   return (
-    <div className="flex flex-col w-full min-h-dvh bg-background text-foreground px-8 py-12 gap-8">
+    <div
+      className={`${theme} flex flex-col w-full min-h-dvh bg-background text-foreground px-8 py-12 gap-8`}
+    >
       <Header />
       <Menu
         columns={COLUMNS}
@@ -31,6 +45,7 @@ const App = () => {
         <Actions />
         <ChartWrapper />
       </main>
+      <ThemeToggle />
     </div>
   );
 };

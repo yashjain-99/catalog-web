@@ -5,6 +5,7 @@ import "./index.css";
 import { IntervalProvider } from "./contexts/IntervalContext";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { makeServer } from "./mirage/config";
+import { ThemeProvider } from "./contexts/ThemeProvider";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,10 +18,12 @@ makeServer();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <IntervalProvider>
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>
-    </IntervalProvider>
+    <ThemeProvider>
+      <IntervalProvider>
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
+      </IntervalProvider>
+    </ThemeProvider>
   </StrictMode>
 );

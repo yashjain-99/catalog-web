@@ -30,7 +30,7 @@ const Menu = ({
               className={`cursor-pointer transition-transform duration-200 ${
                 column.alias === selectedTab
                   ? "font-bold"
-                  : "text-[#858585] hover:font-semibold"
+                  : "text-muted-foreground hover:font-semibold"
               } `}
             >
               <div className="relative z-10 sm:p-3 flex flex-row gap-1 transform hover:scale-105">
