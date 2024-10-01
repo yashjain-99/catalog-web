@@ -1,8 +1,8 @@
-# Catalog Web Assignment
+# Stock monitor
 
 ## _Stock Price Monitor_
 
-This is a demo front-end web application created using React, Vite, and TypeScript as part of the assignment for the Front-End Engineer role at Catalog.
+This is a demo front-end web application created using React, Vite, and TypeScript.
 
 ## ✨ Features ✨
 
